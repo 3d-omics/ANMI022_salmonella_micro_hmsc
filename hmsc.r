@@ -1,5 +1,6 @@
 # hmsc.R
 library(Hmsc)
+library(jsonify)
 
 args <- commandArgs(trailingOnly = TRUE)
 
