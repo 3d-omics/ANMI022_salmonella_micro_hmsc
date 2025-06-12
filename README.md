@@ -41,7 +41,7 @@ conda install r-base r-devtools r-jsonify
 
 ### 5. Install latest version of HMSC
 
-Directly from the Github repository.
+Get into R and install it directly from the Github repository.
 
 ```
 R
