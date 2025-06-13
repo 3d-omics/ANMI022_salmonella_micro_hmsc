@@ -9,8 +9,8 @@ GPU-based Hmsc requires a very specific setup to work correctly.
 ### 1. Create and activate conda environment
 
 ```
-conda create -n hmsc_hpc python=3.10
-conda activate hmsc_hpc
+conda create -n hmsc-hpc python=3.11
+conda activate hmsc-hpc
 ```
 
 ### 2. Install Hmsc-hpc
@@ -20,7 +20,7 @@ Get this specific version and install it from the local files using pip.
 ```
 wget https://github.com/trossi/hmsc-hpc/archive/refs/heads/simplify-io-w-reduce-memory-consumption.zip
 unzip simplify-io-w-reduce-memory-consumption.zip
-pip install hmsc-hpc-simplify-io-w-reduce-memory-consumption
+pip install hmsc-hpc-simplify-io-w-reduce-memory-consumption/
 ```
 
 ### 3. Install tensorflow and related packages
@@ -30,7 +30,7 @@ pip install tensorflow[and-cuda]==2.16.2
 pip install tensorflow-probability==0.24.0
 pip install keras==2.15.0
 pip install tf-keras~=2.16.0rc0
-pip install rdata==0.11.2
+pip install git+https://github.com/vnmabus/rdata.git@develop
 ```
 
 ### 4. Install R and required libraries
@@ -60,6 +60,8 @@ Using regular Hmsc procedures.
 Initialise the model fitting to get the model ready for GPU computation
 
 ```
+conda activate hmsc-hpc
+
 model="hmsc/Unfitted_Hmsc_model_TH2.rds"
 init="init/Unfitted_Hmsc_model_TH2.rds"
 
@@ -92,7 +94,7 @@ cat <<'EOF' > launch_hmsc.sh
 #SBATCH --array=0-3
 
 # Activate conda environment
-source activate hmsc_hpc
+source activate hmsc-hpc
 
 # Set output files
 output=$(printf "output/Hmsc_model_TH2_chain_%.2d.rds" $SLURM_ARRAY_TASK_ID)
